@@ -1,0 +1,107 @@
+[
+  {
+    "name": "John",
+    "surname": "Doe",
+    "age": 21,
+    "group": "Group-1",
+    "phone": "+998330123456"
+  },
+  {
+    "name": "Jane",
+    "surname": "Smith",
+    "age": 22,
+    "group": "Group-2",
+    "phone": "+998330234567"
+  },
+  {
+    "name": "Alice",
+    "surname": "Johnson",
+    "age": 20,
+    "group": "Group-3",
+    "phone": "+998330345678"
+  },
+  {
+    "name": "Bob",
+    "surname": "Brown",
+    "age": 23,
+    "group": "Group-4",
+    "phone": "+998330456789"
+  },
+  {
+    "name": "Charlie",
+    "surname": "Davis",
+    "age": 19,
+    "group": "Group-5",
+    "phone": "+998330567890"
+  },
+  {
+    "name": "Emily",
+    "surname": "Wilson",
+    "age": 21,
+    "group": "Group-6",
+    "phone": "+998330678901"
+  },
+  {
+    "name": "Frank",
+    "surname": "Clark",
+    "age": 22,
+    "group": "Group-7",
+    "phone": "+998330789012"
+  },
+  {
+    "name": "Grace",
+    "surname": "Martinez",
+    "age": 20,
+    "group": "Group-8",
+    "phone": "+998330890123"
+  },
+  {
+    "name": "Hank",
+    "surname": "Lewis",
+    "age": 24,
+    "group": "Group-9",
+    "phone": "+998330901234"
+  },
+  {
+    "name": "Ivy",
+    "surname": "Walker",
+    "age": 19,
+    "group": "Group-10",
+    "phone": "+998331012345"
+  },
+  {
+    "name": "Jack",
+    "surname": "Hall",
+    "age": 21,
+    "group": "Group-1",
+    "phone": "+998331123456"
+  },
+  {
+    "name": "Kelly",
+    "surname": "Allen",
+    "age": 23,
+    "group": "Group-2",
+    "phone": "+998331234567"
+  },
+  {
+    "name": "Leo",
+    "surname": "Young",
+    "age": 20,
+    "group": "Group-3",
+    "phone": "+998331345678"
+  },
+  {
+    "name": "Mia",
+    "surname": "King",
+    "age": 22,
+    "group": "Group-4",
+    "phone": "+998331456789"
+  },
+  {
+    "name": "Nate",
+    "surname": "Wright",
+    "age": 24,
+    "group": "Group-5",
+    "phone": "+998331567890"
+  }
+]

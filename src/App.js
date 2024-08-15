@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home.js";
+import Students from "./components/Students.js";
+import { Provider } from "react-redux";
+import { store } from "./components/Redux/store.js";
+import Posts from "./components/Posts.js";
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient({
+  // defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } },
+});
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="students" element={<Students />} />
+            <Route path="jsonplaceholder" element={<Posts />} />
+          </Route>
+        </Routes>
+      </Provider>
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;
