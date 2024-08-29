@@ -14,7 +14,7 @@ import {
   add_new_student,
   delete_student,
   update_student,
-} from "../Redux/studentsSlice";
+} from "../../Redux/studentsSlice";
 import AlertDialog from "./AlertDialog";
 import DialogComp from "./DialogComp";
 import { useForm } from "react-hook-form";

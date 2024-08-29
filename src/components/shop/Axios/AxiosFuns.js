@@ -1,8 +1,8 @@
 import axios from "axios";
-import GetCookie from "../../Cookies/GetCookie";
+import GetCookie from "../../../Cookies/GetCookie";
 
 const URL = "http://localhost:5000/api";
-
+// axios interceptors
 const AxiosFuns = {
   auth: {
     auth_function: async (data) => {
@@ -49,12 +49,16 @@ const AxiosFuns = {
       return response;
     },
     signUser: async (data) => {
-      return await axios.post(URL + "/users", data);
+      return await axios.post(URL + "/users", { ...data, role: "admin" });
     },
   },
   products: {
-    getAllProducts: async () => {
-      return axios.get(URL+'/product?page=1&limit=10')
+    getAllProducts: async (token) => {
+      return axios.get(URL + "/product?page=1&limit=10", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
     },
     deleteProduct: async () => {},
     updateProduct: async () => {},

@@ -11,16 +11,16 @@ import {
   Form,
 } from "antd";
 import { MailOutlined, UserOutlined } from "@ant-design/icons";
-import useAuthStore from "../../Zustand/store";
-import GetCookie from "../../Cookies/GetCookie";
+import useAuthStore from "../../../Zustand/store";
+import GetCookie from "../../../Cookies/GetCookie";
 import AxiosFuns from "../Axios/AxiosFuns";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQuery } from "react-query";
 import { json, useNavigate } from "react-router-dom";
-import SetCookie from "../../Cookies/SetCookie";
-import DeleteCookie from "../../Cookies/DeleteCookie";
+import SetCookie from "../../../Cookies/SetCookie";
+import DeleteCookie from "../../../Cookies/DeleteCookie";
 
 const { Title, Text } = Typography;
 
@@ -161,7 +161,7 @@ const UserCard = () => {
                   </Text>
                 </Col>
               </Row>
-              <Row justify="space-between">
+              <Row justify="space-between" >
                 <Col>
                   <Text type="secondary">Last Updated:</Text>
                 </Col>

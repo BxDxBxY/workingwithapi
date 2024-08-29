@@ -3,8 +3,8 @@ import { Button, Checkbox, Input, message } from "antd";
 import { useMutation } from "react-query";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "../../Zustand/store";
-import SetCookie from "../../Cookies/SetCookie";
+import useAuthStore from "../../../Zustand/store";
+import SetCookie from "../../../Cookies/SetCookie";
 import AxiosFuns from "../Axios/AxiosFuns";
 
 const LoginPage = () => {

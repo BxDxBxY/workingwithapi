@@ -7,10 +7,10 @@ import {
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Skeleton, Spin, theme } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
-import GetCookie from "../Cookies/GetCookie";
+import GetCookie from "../../Cookies/GetCookie";
 import { useQuery } from "react-query";
-import useAuthStore from "../Zustand/store";
-import SetCookie from "../Cookies/SetCookie";
+import useAuthStore from "../../Zustand/store";
+import SetCookie from "../../Cookies/SetCookie";
 import AxiosFuns from "./Axios/AxiosFuns";
 
 const { Header, Content, Footer, Sider } = Layout;

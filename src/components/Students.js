@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import StudentCard from "./Student/StudentCard";
 import { useDispatch, useSelector } from "react-redux";
 import DialogComp from "./Student/DialogComp";
-import { add_new_student } from "./Redux/studentsSlice";
+import { add_new_student } from "../Redux/studentsSlice";
 
 const Students = () => {
   const students = useSelector((state) => state.students);

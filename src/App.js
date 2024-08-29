@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home.js";
 import Students from "./components/Students.js";
 import { Provider } from "react-redux";
-import { store } from "./components/Redux/store.js";
+import { store } from "./Redux/store.js";
 import Posts from "./components/Posts.js";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Shop from "./components/shop/Shop.js";
@@ -77,3 +77,5 @@ export default App;
 // redirect to
 // yup validation
 // .env config file language
+// folder structure 
+// axios interceptors

@@ -1,6 +1,6 @@
 import { useLocation, Navigate } from "react-router-dom";
-import useAuthStore from "./Zustand/store";
-import GetCookie from "./Cookies/GetCookie";
+import useAuthStore from "../Zustand/store";
+import GetCookie from "../Cookies/GetCookie";
 
 export function PrivateRoute({ allowedRoles, userRole, children }) {
   let location = useLocation();
