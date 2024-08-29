@@ -1,17 +1,12 @@
 import { Button, Flex } from "antd";
 import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useStore } from "zustand";
-import useAuthStore from "../../Zustand/store";
-
-// ############################
 
 const Auth = () => {
   const navigate = useNavigate();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  useEffect(() => {
-    !isAuthenticated ? navigate("/auth/login") : navigate("/onlineshop");
-  }, [navigate]);
+  // useEffect(()=>{
+  //   // navigate('/auth/login')
+  // })
   return (
     <div className="w-full h-screen bg-slate-800">
       <Flex flex={true} justify="space-between" className="w-[300px] p-[20px]">

@@ -12,7 +12,7 @@ const useAuthStore = create(
       setAuthenticated: (status) => set({ isAuthenticated: status }),
     }),
     {
-      name: "userAuthStore", // name of the item in the storage (must be unique)
+      name: "userAuthStore", 
       storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
     }
   )

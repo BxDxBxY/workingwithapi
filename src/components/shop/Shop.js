@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import {
   DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
+  LogoutOutlined,
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Layout, Menu, Skeleton, Spin, theme } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import GetCookie from "../Cookies/GetCookie";
 import { useQuery } from "react-query";
-import axios from "axios";
 import useAuthStore from "../Zustand/store";
 import SetCookie from "../Cookies/SetCookie";
+import AxiosFuns from "./Axios/AxiosFuns";
+
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -22,13 +22,13 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
-const URL = "http://localhost:5000/api";
 
+const URL = "http://localhost:5000/api";
 
 const items = [
   getItem("Profile", "1", <UserOutlined />),
   // getItem("Profile", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
+  getItem("Products", "2", <DesktopOutlined />),
   getItem("User", "sub1", <UserOutlined />, [
     getItem("Tom", "3"),
     getItem("Bill", "4"),
@@ -36,12 +36,32 @@ const items = [
   ]),
   getItem("Team", "sub2", <TeamOutlined />, [
     getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
+    getItem("Team 2", "7"),
   ]),
-  getItem("Files", "9", <FileOutlined />),
+  getItem("Logout", "8", <LogoutOutlined />),
 ];
 
 const Shop = () => {
+  const handleMenuClick = (key) => {
+    switch (key.key) {
+      case "1":
+        navigate("/onlineshop/user");
+        break;
+      case "2":
+        navigate("/onlineshop/products");
+        break;
+      case "3":
+        console.log("Tom clicked");
+        break;
+      case "8":
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.reload();
+        break;
+      default:
+        console.error("Error option is not available");
+    }
+  };
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const setUserInfo = useAuthStore((state) => state.setUserInfo);
@@ -53,7 +73,7 @@ const Shop = () => {
   let CookieToken = GetCookie("access_token");
   const { data, isLoading, isError, refetch } = useQuery(
     ["/user"],
-    () => getUserInfo(CookieToken || access_token),
+    () => AxiosFuns.user.getUserInfo(CookieToken || access_token),
     {
       enabled: !!CookieToken || !!access_token,
       retry: false,
@@ -66,15 +86,20 @@ const Shop = () => {
       },
     }
   );
-  const getUserInfo = (token) => {
-    return axios.get(URL + "/users/me", {
-      headers: {
-        Authorization: "Bearer " + access_token,
-      },
-    });
-  };
+
+  // const getUserInfo = (token) => {
+  //   return axios.get(URL + "/users/me", {
+  //     headers: {
+  //       Authorization: "Bearer " + token,
+  //     },
+  //   });
+  // };
+  
+
   useEffect(() => {
-    if (access_token !== CookieToken) {
+    if (access_token !== CookieToken || access_token === "undefined") {
+      console.log("checking shop");
+      localStorage.clear();
       navigate("/auth");
     }
   }, [access_token, navigate, CookieToken]);
@@ -97,6 +122,7 @@ const Shop = () => {
               defaultSelectedKeys={["1"]}
               mode="inline"
               items={items}
+              onClick={handleMenuClick}
             />
           </Sider>
           <Layout>
@@ -130,8 +156,13 @@ const Shop = () => {
                   borderRadius: borderRadiusLG,
                 }}
               >
-                <Outlet />
+                {isLoading ? (
+                  <Skeleton active className="w-[400px] mx-auto" />
+                ) : (
+                  <Outlet />
+                )}
               </div>
+              {/* <Spin tip="Loading">{content}</Spin> */}
             </Content>
             <Footer
               style={{

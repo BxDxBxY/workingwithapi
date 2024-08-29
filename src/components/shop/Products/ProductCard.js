@@ -10,15 +10,15 @@ const ProductCard = ({ product }) => {
       style={{ width: 300 }}
       cover={
         <img
-          alt={product.name}
+          alt={product?.name}
           src="https://via.placeholder.com/300" // Placeholder image; replace with actual product image URL
         />
       }
     >
-      <Tag color="blue">{product.category.name}</Tag>
-      <Title level={4}>{product.name}</Title>
+      <Tag color="blue">{product?.category.name}</Tag>
+      <Title level={4}>{product?.name}</Title>
       <Text strong style={{ display: "block", marginBottom: 8 }}>
-        ${product.price.toFixed(2)}
+        ${product?.price?.toFixed(2)}
       </Text>
       <Button type="primary" block>
         Add to Cart

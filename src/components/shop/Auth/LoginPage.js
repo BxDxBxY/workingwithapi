@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Alert, Button, Checkbox, Input, message } from "antd";
-import axios from "axios";
+import React, { useState } from "react";
+import { Button, Checkbox, Input, message } from "antd";
 import { useMutation } from "react-query";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useStore } from "zustand";
-import useAuthStore from "./../../Zustand/store";
+import useAuthStore from "../../Zustand/store";
 import SetCookie from "../../Cookies/SetCookie";
-import GetCookie from "../../Cookies/GetCookie";
-
-const URL = "http://localhost:5000/api";
+import AxiosFuns from "../Axios/AxiosFuns";
 
 const LoginPage = () => {
   const {
@@ -21,56 +17,42 @@ const LoginPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const setAccessToken = useAuthStore((state) => state.setAccessToken);
   const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
-  const access_token = localStorage.getItem("access_token");
-  const CookieToken = GetCookie("access_token");
   const navigate = useNavigate();
 
-  const auth_function = async (data) => {
-    return await axios
-      .post(URL + "/auth/signin", data)
-      .then((res) => res?.data)
-      .catch((er) => {
-        throw er?.response?.data?.message || "Something went wrong!";
-      });
-  };
-
-  function success() {
+  async function success() {
     messageApi.open({
       type: "success",
       content: "Successfully Signed In!",
     });
   }
 
-  const { mutate, isLoading, isError } = useMutation(auth_function, {
-    onSuccess: (data) => {
-      const token = data?.data?.access_token;
-      setAccessToken(token);
-      localStorage.setItem("access_token", token);
-      SetCookie("access_token", token, 2);
-      setAuthenticated(true);
-      success();
-      return setTimeout(() => {
-        navigate("/onlineshop");
-      }, 2000);
-    },
-    onError: (error) => {
-      setApiError(error);
-      console.log("Failed:", error);
-    },
-  });
+  const { mutate, isLoading, isError } = useMutation(
+    AxiosFuns.auth.auth_function,
+    {
+      onSuccess: (data) => {
+        const token = data?.data?.access_token;
+        setAuthenticated(true);
+        setAccessToken(token);
+        localStorage.setItem("access_token", token);
+        SetCookie("access_token", token, 2);
+        success();
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        return setTimeout(() => {
+          console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+          navigate("/onlineshop/user");
+        }, 2000);
+      },
+      onError: (error) => {
+        setApiError(error);
+        console.log("Failed:", error);
+      },
+    }
+  );
 
   const onSubmit = (values) => {
     setApiError(null);
     mutate(values);
   };
-
-  useEffect(() => {
-    if (access_token === CookieToken) {
-      console.log(true);
-      setAuthenticated(true);
-      navigate("/onlineshop");
-    }
-  }, [access_token, navigate, CookieToken]);
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
