@@ -10,9 +10,13 @@ const useAuthStore = create(
       setUserInfo: (userInfo) => set({ userInfo: userInfo }),
       isAuthenticated: false,
       setAuthenticated: (status) => set({ isAuthenticated: status }),
+      Products: [],
+      setProducts: (products) => set({ Products: products }),
+      Categories: [],
+      setCategories: (categories) => set({ Categories: categories }),
     }),
     {
-      name: "userAuthStore", 
+      name: "userAuthStore",
       storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
     }
   )

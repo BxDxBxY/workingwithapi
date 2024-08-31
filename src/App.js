@@ -1,18 +1,18 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./components/Home.js";
+import Home from "./Pages/Home/Home.js";
 import Students from "./components/Students.js";
 import { Provider } from "react-redux";
 import { store } from "./Redux/store.js";
 import Posts from "./components/Posts.js";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Shop from "./components/shop/Shop.js";
-import SigninPage from "./components/shop/Auth/Signin_page.js";
-import Auth from "./components/shop/Auth/Auth.js";
-import LoginPage from "./components/shop/Auth/LoginPage.js";
-import UserCard from "./components/shop/User/UserCard.js";
+import Shop from "./Pages/shop/Shop.js";
+import SigninPage from "./Pages/Auth/Signin_page.js";
+import Auth from "./Pages/Auth/Auth.js";
+import LoginPage from "./Pages/Auth/LoginPage.js";
+import UserCard from "./components/User/UserCard.js";
 import { PrivateRoute } from "./components/PrivateRoute";
-import Products from "./components/shop/Products/Products.js";
+import Products from "./Pages/Products/Products.js";
 
 const queryClient = new QueryClient({
   // defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } },
@@ -77,5 +77,5 @@ export default App;
 // redirect to
 // yup validation
 // .env config file language
-// folder structure 
+// folder structure
 // axios interceptors

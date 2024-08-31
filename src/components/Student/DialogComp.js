@@ -8,7 +8,8 @@ import {
   Button,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import InputTextFieldComp from "../InputTextFieldComp";
+import InputTextFieldComp from "../Inputs/InputTextFieldComp";
+
 
 const DialogComp = React.memo(
   ({ open, handleClose, onSubmit, methodType, student }) => {

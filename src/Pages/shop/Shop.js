@@ -11,7 +11,7 @@ import GetCookie from "../../Cookies/GetCookie";
 import { useQuery } from "react-query";
 import useAuthStore from "../../Zustand/store";
 import SetCookie from "../../Cookies/SetCookie";
-import AxiosFuns from "./Axios/AxiosFuns";
+import AxiosFuns from "../../Axios/AxiosFuns";
 
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
@@ -94,7 +94,6 @@ const Shop = () => {
   //     },
   //   });
   // };
-  
 
   useEffect(() => {
     if (access_token !== CookieToken || access_token === "undefined") {

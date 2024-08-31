@@ -10,17 +10,18 @@ import {
   message,
   Form,
 } from "antd";
+
 import { MailOutlined, UserOutlined } from "@ant-design/icons";
-import useAuthStore from "../../../Zustand/store";
-import GetCookie from "../../../Cookies/GetCookie";
-import AxiosFuns from "../Axios/AxiosFuns";
+import GetCookie from "../../Cookies/GetCookie";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQuery } from "react-query";
-import { json, useNavigate } from "react-router-dom";
-import SetCookie from "../../../Cookies/SetCookie";
-import DeleteCookie from "../../../Cookies/DeleteCookie";
+import { useNavigate } from "react-router-dom";
+import AxiosFuns from "../../Axios/AxiosFuns";
+import SetCookie from "../../Cookies/SetCookie";
+import DeleteCookie from "../../Cookies/DeleteCookie";
+import useAuthStore from "../../Zustand/store";
 
 const { Title, Text } = Typography;
 
@@ -31,15 +32,11 @@ const schema = yup.object().shape({
 });
 
 const UserCard = () => {
-  console.log(GetCookie("user_credentials"));
   const { isAuthenticated } = useAuthStore((state) => state);
-  console.log(isAuthenticated);
 
   const [userInfo, setUserInfo] = useState(
-    (GetCookie("user_credentials") ||
-      localStorage.getItem("user_credentials")) &&
-      (JSON.parse(GetCookie("user_credentials")) ||
-        JSON.parse(localStorage.getItem("user_credentials")))
+    JSON.parse(GetCookie("user_credentials")) ||
+      JSON.parse(localStorage.getItem("user_credentials"))
   );
 
   //
@@ -89,15 +86,25 @@ const UserCard = () => {
   }, [userInfo, reset]);
 
   const onSubmit = (e) => {
+    setIsUpdating(true);
     handleUpdate({ ...userInfo, ...e, updatedAt: new Date().toISOString() });
   };
 
   const handleUpdate = (data) => {
-    setIsUpdating(true);
-    setUserInfo((prev) => {
-      return { ...prev, ...data, updatedAt: new Date().toISOString() };
-    });
-    updateUserQuery.mutate(data);
+    if (data.password !== "") {
+      setUserInfo((prev) => {
+        return { ...prev, ...data };
+      });
+      updateUserQuery.mutate(data);
+    } else {
+      setUserInfo((prev) => {
+        const upd_data = { ...prev, ...data };
+        delete upd_data.password;
+        return upd_data;
+      });
+      delete data.password;
+      updateUserQuery.mutate(data);
+    }
   };
   const handleDelete = async () => {
     deleteUser.mutate(userInfo?._id);
@@ -161,7 +168,7 @@ const UserCard = () => {
                   </Text>
                 </Col>
               </Row>
-              <Row justify="space-between" >
+              <Row justify="space-between" style={{ marginBottom: "10px" }}>
                 <Col>
                   <Text type="secondary">Last Updated:</Text>
                 </Col>
@@ -171,9 +178,13 @@ const UserCard = () => {
                   </Text>
                 </Col>
               </Row>
-              <Row>
-                <Button onClick={() => setIsUpdating(true)}>Update</Button>
-                <Button onClick={handleDelete}>Delete Account</Button>
+              <Row justify="space-between" style={{ marginBottom: "10px" }}>
+                <Col>
+                  <Button onClick={() => setIsUpdating(true)}>Update</Button>
+                </Col>
+                <Col>
+                  <Button onClick={handleDelete}>Delete Account</Button>
+                </Col>
               </Row>
             </Card>
           </Col>

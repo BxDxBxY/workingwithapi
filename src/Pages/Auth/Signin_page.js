@@ -3,9 +3,9 @@ import { Button, Checkbox, Input, message } from "antd";
 import { useMutation } from "react-query";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "../../../Zustand/store";
-import SetCookie from "../../../Cookies/SetCookie";
-import AxiosFuns from "../Axios/AxiosFuns";
+import useAuthStore from "../../Zustand/store";
+import SetCookie from "../../Cookies/SetCookie";
+import AxiosFuns from "../../Axios/AxiosFuns";
 
 const SigninPage = () => {
   const {
@@ -120,9 +120,7 @@ const SigninPage = () => {
             render={({ field }) => <Input {...field} />}
           />
           {errors?.firstName && (
-            <span className="text-red-400">
-              {errors?.firstName?.message}
-            </span>
+            <span className="text-red-400">{errors?.firstName?.message}</span>
           )}
         </div>
 
@@ -203,7 +201,7 @@ const SigninPage = () => {
           />
         </div>
 
-        {(apiError && isError) && (
+        {apiError && isError && (
           <div className="text-red-500 mb-4">
             {typeof apiError === "string"
               ? apiError
